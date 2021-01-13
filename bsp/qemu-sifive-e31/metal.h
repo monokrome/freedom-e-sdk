@@ -73,6 +73,14 @@
 
 #define METAL_MAX_PWM0_NCMP 4
 
+#define METAL_SIFIVE_REMAPPER2_3000000_FROM_REGION_BASE 0
+
+#define METAL_SIFIVE_REMAPPER2_3000000_FROM_REGION_SIZE 4294967296
+
+#define METAL_SIFIVE_REMAPPER2_3000000_TO_REGION_BASE 0
+
+#define METAL_SIFIVE_REMAPPER2_3000000_TO_REGION_SIZE 4294967296
+
 #define __METAL_SERIAL_10013000_INTERRUPTS 1
 
 #define METAL_MAX_UART_INTERRUPTS 1
@@ -90,6 +98,7 @@
 #include <metal/drivers/sifive_gpio0.h>
 #include <metal/drivers/sifive_gpio-leds.h>
 #include <metal/drivers/sifive_pwm0.h>
+#include <metal/drivers/sifive_remapper2.h>
 #include <metal/drivers/sifive_rtc0.h>
 #include <metal/drivers/sifive_spi0.h>
 #include <metal/drivers/sifive_test0.h>
@@ -142,6 +151,9 @@ extern struct __metal_driver_sifive_gpio_led __metal_dt_led_2;
 
 /* From pwm@10015000 */
 extern struct __metal_driver_sifive_pwm0 __metal_dt_pwm_10015000;
+
+/* From remapper@3000000 */
+extern struct __metal_driver_sifive_remapper2 __metal_dt_remapper_3000000;
 
 /* From aon@10000000 */
 extern struct __metal_driver_sifive_rtc0 __metal_dt_rtc_10000000;
@@ -744,6 +756,69 @@ static __inline__ int __metal_driver_sifive_pwm0_comparator_count(struct metal_p
 
 
 
+/* --------------------- sifive_remapper2 ------------ */
+static __inline__ unsigned long __metal_driver_sifive_remapper2_base(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_BASE_ADDRESS;
+	}
+	else {
+		return 0;
+	}
+}
+
+static __inline__ unsigned long __metal_driver_sifive_remapper2_size(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_SIZE;
+	}
+	else {
+		return 0;
+	}
+}
+
+static __inline__ unsigned long long __metal_driver_sifive_remapper2_from_region_base(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_FROM_REGION_BASE;
+	}
+	else {
+		return 0;
+	}
+}
+
+static __inline__ unsigned long long __metal_driver_sifive_remapper2_from_region_size(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_FROM_REGION_SIZE;
+	}
+	else {
+		return 0;
+	}
+}
+
+static __inline__ unsigned long long __metal_driver_sifive_remapper2_to_region_base(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_TO_REGION_BASE;
+	}
+	else {
+		return 0;
+	}
+}
+
+static __inline__ unsigned long long __metal_driver_sifive_remapper2_to_region_size(const struct metal_remapper *remapper)
+{
+	if ((uintptr_t)remapper == (uintptr_t)&__metal_dt_remapper_3000000) {
+		return METAL_SIFIVE_REMAPPER2_3000000_TO_REGION_SIZE;
+	}
+	else {
+		return 0;
+	}
+}
+
+
+
 /* --------------------- sifive_rtc0 ------------ */
 static __inline__ unsigned long __metal_driver_sifive_rtc0_control_base(const struct metal_rtc *const rtc)
 {
@@ -1238,6 +1313,11 @@ struct __metal_driver_sifive_i2c0 *__metal_i2c_table[] = {
 __asm__ (".weak __metal_pwm_table");
 struct __metal_driver_sifive_pwm0 *__metal_pwm_table[] = {
 					&__metal_dt_pwm_10015000};
+
+/* From remapper@3000000 */
+#define __METAL_DT_REMAPPER_HANDLE (&__metal_dt_remapper_3000000.remapper)
+
+#define __METAL_DT_REMAPPER_3000000_HANDLE (&__metal_dt_remapper_3000000.remapper)
 
 #define __METAL_DT_MAX_RTCS 1
 
