@@ -22,6 +22,8 @@
                         status = "okay";
                         timebase-frequency = <1000000>;
                         hardware-exec-breakpoint-count = <4>;
+                        sifive,rnmi-irq-addr = <0x20410000 0x0>;
+                        sifive,rnmi-exception-addr = <0x20420000 0x0>;
                         hlic: interrupt-controller {
                                 #interrupt-cells = <1>;
                                 compatible = "riscv,cpu-intc";
