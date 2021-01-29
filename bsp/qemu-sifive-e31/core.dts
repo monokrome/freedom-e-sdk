@@ -24,6 +24,7 @@
                         hardware-exec-breakpoint-count = <4>;
                         sifive,rnmi-irq-addr = <0x20410000 0x0>;
                         sifive,rnmi-exception-addr = <0x20420000 0x0>;
+                        sifive,buserror = <&buserror>;
                         hlic: interrupt-controller {
                                 #interrupt-cells = <1>;
                                 compatible = "riscv,cpu-intc";
@@ -114,7 +115,7 @@
                         reg = <0xc000000 0x4000000>;
                         reg-names = "control";
                         riscv,max-priority = <7>;
-                        riscv,ndev = <26>;
+                        riscv,ndev = <35>;
                 };
                 global-external-interrupts {
                         compatile = "sifive,global-external-interrupts0";
@@ -201,6 +202,17 @@
                         label = "LD0blue";
                         gpios = <&gpio0 21>;
                         linux,default-trigger = "none";
+                };
+                buserror: bus-error-unit@4000000 {
+                        compatible = "sifive,buserror0";
+                        interrupt-parent = <&plic>;
+                        interrupts = <35>;
+                        reg = <0x4000000 0x1000>;
+                        reg-names = "control";
+                };
+                error-device@3000 {
+                        compatible = "sifive,error0";
+                        reg = <0x3000 0x1000>;
                 };
         };
 };
