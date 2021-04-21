@@ -38,6 +38,11 @@ do
 	    continue
 	fi
 
+        # example-rnmi is only supported on qemu-sifive-e31 bsp
+        if [ "${program}" == "example-rnmi" -a "${target}" != "qemu-sifive-e31" ]; then
+            continue
+        fi
+
         make TARGET="${target}" PROGRAM="${program}" CONFIGURATION="${CONFIGURATION}" -j${nproc} software
         make TARGET="${target}" PROGRAM="${program}" CONFIGURATION="${CONFIGURATION}" clean-software
     done
